@@ -1,193 +1,134 @@
-# Flashcardy - Interview Question Knowledge Base
+# Flashcardy
 
-A single-user MVP flashcard application for storing and studying interview questions for JavaScript, TypeScript, React, and Node.js.
+A full-stack flashcard application for storing and studying interview questions. Built with React, TypeScript, Node.js, and PostgreSQL.
 
-## Tech Stack
+## ✨ Features
 
-### Backend
-- **Node.js** + **TypeScript**
-- **Express** - Chosen for its straightforward API, extensive ecosystem, and simplicity. For an MVP, Express provides all needed features without unnecessary complexity.
-- **PostgreSQL** - Relational database for structured flashcard data
-- **Prisma ORM** - Type-safe database access with excellent TypeScript support
+- **Flashcard Management** - Create, edit, and delete flashcards with rich text support
+- **Search & Filter** - Search by content and filter by technology (JavaScript, TypeScript, React, Node.js) and categories
+- **Study Mode** - Focused study interface with keyboard shortcuts for efficient learning
+- **Authentication** - JWT-based authentication for secure access
+- **Markdown Support** - Answers support markdown formatting with syntax highlighting
 
-### Frontend (Phase 2)
+## 🛠️ Tech Stack
+
+**Frontend**
 - React + TypeScript + Vite
-- Custom CSS/SCSS (no Tailwind)
+- SCSS for styling
+- React Router for navigation
 
-## Project Structure
+**Backend**
+- Node.js + Express + TypeScript
+- PostgreSQL + Prisma ORM
+- JWT authentication
 
-```
-flashcardy/
-├── client/                   # Frontend (React + Vite)
-│   ├── src/
-│   │   ├── api/             # API client functions
-│   │   ├── components/      # React components
-│   │   ├── pages/           # Page components
-│   │   ├── types/           # TypeScript types
-│   │   └── App.tsx          # Main app component
-│   └── package.json
-├── src/                      # Backend
-│   ├── index.ts             # Express server entry point
-│   └── routes/
-│       └── flashcards.ts    # Flashcard CRUD endpoints
-├── prisma/
-│   └── schema.prisma        # Database schema
-├── package.json             # Backend dependencies
-└── tsconfig.json
-```
-
-## Data Model
-
-```typescript
-Flashcard {
-  id: string              // UUID
-  question: string        // The question text
-  answer: string          // The answer text
-  tech: "JavaScript" | "TypeScript" | "React" | "Node"
-  categories: string[]    // Array of category tags
-  difficulty?: "easy" | "medium" | "hard"
-  createdAt: Date
-  updatedAt: Date
-}
-```
-
-## Setup Instructions
+## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js (v18+)
-- PostgreSQL (running locally or accessible instance)
+- PostgreSQL (local or remote)
 
 ### Installation
 
-#### Backend Setup
-
-1. **Install backend dependencies:**
+1. **Clone the repository**
    ```bash
+   git clone <repository-url>
+   cd flashcardy
+   ```
+
+2. **Set up the backend**
+   ```bash
+   # Install dependencies
    npm install
-   ```
-
-2. **Configure environment variables:**
-   - Copy `.env.example` to `.env`:
-     ```bash
-     cp .env.example .env
-     ```
-   - Edit `.env` and fill in your values:
-     - `DATABASE_URL` - Your PostgreSQL connection string
-     - `JWT_SECRET` - Generate a secure random string (see .env.example)
-     - `ADMIN_EMAIL` - Email for the admin account
-     - `ADMIN_PASSWORD` - Password for the admin account
-     - `FRONTEND_URL` - Frontend URL (default: http://localhost:5173)
-   - **Never commit `.env` to version control!** It's already in `.gitignore`
-
-3. **Run database migrations:**
-   ```bash
+   
+   # Configure environment variables
+   cp .env.example .env
+   # Edit .env with your database URL and other settings
+   
+   # Run migrations
    npm run db:migrate
-   ```
-   This will create the database tables and generate Prisma Client.
-
-4. **Seed admin user:**
-   ```bash
+   
+   # Seed admin user
    npm run db:seed
    ```
-   This creates the admin user with the credentials from your `.env` file.
 
-5. **Start backend server:**
-   ```bash
-   npm run dev
-   ```
-   The backend will run on `http://localhost:3000` (or port specified in `.env`).
-
-#### Frontend Setup
-
-1. **Install frontend dependencies:**
+3. **Set up the frontend**
    ```bash
    cd client
    npm install
    ```
 
-2. **Start frontend development server:**
+4. **Start development servers**
+   
+   Backend (from root directory):
    ```bash
    npm run dev
    ```
-   The frontend will run on `http://localhost:5173` by default.
+   
+   Frontend (from client directory):
+   ```bash
+   cd client
+   npm run dev
+   ```
 
-   **Note:** The frontend expects the backend API at `http://localhost:3000`. You can configure this by setting the `VITE_API_URL` environment variable in a `.env` file in the `client` directory.
+The app will be available at `http://localhost:5173` (frontend) and `http://localhost:3000` (backend API).
 
-## Available Scripts
+## 📜 Available Scripts
 
-### Backend Scripts (root directory)
-- `npm run dev` - Start backend development server with hot reload
-- `npm run build` - Build TypeScript to JavaScript
-- `npm start` - Run production build
-- `npm run db:generate` - Generate Prisma Client
-- `npm run db:migrate` - Run database migrations
-- `npm run db:seed` - Seed admin user
-- `npm run db:studio` - Open Prisma Studio (database GUI)
+### Backend (root directory)
 
-### Frontend Scripts (client directory)
-- `npm run dev` - Start Vite development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with hot reload |
+| `npm run build` | Build for production |
+| `npm start` | Run production build |
+| `npm run db:migrate` | Run database migrations |
+| `npm run db:seed` | Seed admin user |
+| `npm run db:studio` | Open Prisma Studio (database GUI) |
 
-## Authentication
+### Frontend (client directory)
 
-This app uses JWT-based authentication with a single admin account. All CRUD operations (create, update, delete flashcards) require authentication. Reading flashcards is public.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
 
-**Setup:** Configure `ADMIN_EMAIL` and `ADMIN_PASSWORD` in your `.env` file, then run `npm run db:seed` to create the admin user.
+## 📚 Documentation
 
-See [AUTH_SETUP.md](./AUTH_SETUP.md) for detailed authentication setup and configuration instructions.
+- [API Documentation](./api.md) - Detailed API endpoint reference
+- [Authentication Setup](./AUTH_SETUP.md) - Authentication configuration guide
+- [Database Setup](./DATABASE_SETUP.md) - PostgreSQL setup instructions
+- [Deployment Guide](./RAILWAY_DEPLOYMENT.md) - Railway deployment instructions
 
-## API Documentation
+## 🏗️ Project Structure
 
-See [api.md](./api.md) for detailed endpoint documentation.
+```
+flashcardy/
+├── client/          # Frontend (React + Vite)
+│   └── src/
+│       ├── api/     # API client functions
+│       ├── components/
+│       ├── pages/
+│       └── types/
+├── src/             # Backend (Express + TypeScript)
+│   ├── routes/      # API routes
+│   ├── middleware/  # Auth middleware
+│   └── lib/         # Utilities
+└── prisma/          # Database schema & migrations
+```
 
-## Development Approach
+## 🔐 Environment Variables
 
-This MVP follows a phased implementation approach:
+See `.env.example` for required environment variables. Key variables:
 
-- **Phase 1**: Backend Foundation ✅
-- **Phase 2**: Frontend Foundation ✅
-- **Phase 3**: Flashcard Management ✅
-- **Phase 4**: Study Mode ✅
+- `DATABASE_URL` - PostgreSQL connection string
+- `JWT_SECRET` - Secret key for JWT tokens
+- `ADMIN_EMAIL` - Admin user email
+- `ADMIN_PASSWORD` - Admin user password
+- `FRONTEND_URL` - Frontend URL (for CORS)
 
-## Architecture Decisions
+## 📝 License
 
-### Backend
-- **Express over Fastify**: Chosen for simplicity and familiarity. The performance difference is negligible for MVP scale.
-- **No service layer**: Routes contain business logic directly to avoid premature abstraction. Can be refactored later if needed.
-- **REST API**: Simple, standard REST endpoints. No GraphQL complexity.
-- **Prisma ORM**: Provides type safety and eliminates manual SQL for this MVP scope.
-
-### Frontend
-- **Native fetch**: No axios or other HTTP libraries. Simple, built-in fetch API is sufficient for MVP.
-- **No global state**: Using React's useState for local component state. No Redux/Zustand needed yet.
-- **Custom SCSS**: Component-scoped styles without Tailwind. Keeps styles simple and maintainable.
-- **Controlled components**: All form inputs are controlled components for predictable state management.
-
-## Current Features
-
-### Flashcard Management
-- ✅ View all flashcards
-- ✅ Search flashcards by question/answer text
-- ✅ Filter by technology (JS, TS, React, Node)
-- ✅ Filter by category tags
-- ✅ Create new flashcards with form validation
-- ✅ Edit existing flashcards
-- ✅ Delete flashcards (with confirmation)
-- ✅ Clean, readable card display with syntax-friendly answer formatting
-- ✅ Category management (add/remove tags)
-- ✅ Difficulty levels (easy, medium, hard)
-
-### Study Mode
-- ✅ Focused study interface with question-first display
-- ✅ Toggle to show/hide answers
-- ✅ Navigate between flashcards (previous/next)
-- ✅ Random card selection from filtered set
-- ✅ Keyboard shortcuts for efficient studying:
-  - `Space` / `→` - Next card
-  - `←` - Previous card
-  - `R` - Random card
-  - `Enter` / `A` - Toggle answer
-  - `Esc` - Back to list
-- ✅ Card counter showing progress (e.g., "Card 3 of 10")
-- ✅ Respects current filters from list view
+ISC
