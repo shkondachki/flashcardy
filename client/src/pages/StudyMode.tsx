@@ -4,6 +4,7 @@ import {Flashcard, FlashcardFilters, Tech} from '../types';
 import {TECH_OPTIONS, STUDY_MODE_MAX_CARDS} from '../constants';
 import styles from './StudyMode.module.scss';
 import {FlashcardCard} from "../components/FlashcardCard.tsx";
+import {Preloader} from "../components/Preloader.tsx";
 
 interface StudyModeProps {
     onBack: () => void;
@@ -119,7 +120,7 @@ export function StudyMode({onBack}: StudyModeProps) {
     if (loading) {
         return (
             <div className={styles.container}>
-                <div className={styles.loading}>Loading flashcards...</div>
+                <Preloader />
             </div>
         );
     }

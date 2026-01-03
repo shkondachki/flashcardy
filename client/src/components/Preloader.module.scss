@@ -1,0 +1,74 @@
+@use '../styles/variables' as *;
+
+.fullscreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: $spacing-lg;
+}
+
+.inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+}
+
+.spinner {
+  border: 3px solid $platinum;
+  border-top-color: $light-platinum;
+  border-radius: $radius-full;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+.spinner.small {
+  width: 30px;
+  height: 30px;
+  border-width: 2px;
+}
+
+.spinner.medium {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+.spinner.large {
+  width: 60px;
+  height: 60px;
+  border-width: 4px;
+}
+
+.message {
+  font-size: $font-size-lg;
+  color: $gray-600;
+  text-align: center;
+}
+
+.fullscreen .message {
+  font-size: $font-size-xl;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+

@@ -10,6 +10,7 @@ import { AppProvider } from './context/AppContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { checkAuth } from './api/auth';
 import styles from './App.module.scss';
+import {Preloader} from "./components/Preloader.tsx";
 
 function AppContent() {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ function AppContent() {
     return (
       <div className={styles.app}>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-          Loading...
+          <Preloader />
         </div>
       </div>
     );

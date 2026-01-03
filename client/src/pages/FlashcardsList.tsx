@@ -6,6 +6,7 @@ import {SearchAndFilters} from '../components/SearchAndFilters';
 import {FlashcardForm, FlashcardFormData} from '../components/FlashcardForm';
 import {useApp} from '../context/AppContext';
 import styles from './FlashcardsList.module.scss';
+import {Preloader} from "../components/Preloader.tsx";
 
 interface FlashcardsListProps {
     filters: FlashcardFilters;
@@ -172,7 +173,13 @@ export function FlashcardsList({
     if (loading && flashcards.length === 0) {
         return (
             <div className={styles.container}>
-                <div className={styles.loading}>Loading flashcards...</div>
+                <SearchAndFilters
+                    filters={filters}
+                    onFiltersChange={setFilters}
+                    availableCategories={availableCategories}
+                />
+
+                <Preloader />
             </div>
         );
     }
@@ -212,7 +219,7 @@ export function FlashcardsList({
 
                     {hasMore && (
                         <div ref={observerTarget} className={styles.loadingTrigger}>
-                            {loadingMore && <div className={styles.loadingMore}>Loading more...</div>}
+                            {loadingMore && <Preloader />}
                         </div>
                     )}
                 </>
