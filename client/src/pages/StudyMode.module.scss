@@ -1,0 +1,101 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.container {
+  max-width: $container-md;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-md;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  @include flex-between;
+  margin-bottom: $spacing-lg;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.cardCounter {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+}
+
+.filtersSection {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-xl;
+  flex-wrap: wrap;
+  padding: $spacing-md;
+  background: $white;
+  border-radius: $radius-md;
+}
+
+
+.studyCard {
+  background: $dark-platinum;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $spacing-xl;
+
+  @include mobile {
+    padding: 0;
+  }
+}
+
+.navigationControls {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-xl;
+  flex-wrap: wrap;
+}
+
+.keyboardHints {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-lg;
+  flex-wrap: wrap;
+  padding: $spacing-md;
+  background: $dark-platinum;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+}
+
+.hintItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  kbd {
+    background: $off-black;
+    border: 1px solid $platinum;
+    border-radius: 3px;
+    padding: $spacing-xs $spacing-sm;
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+  }
+}
+
+.loading,
+.emptyState {
+  text-align: center;
+  padding: $spacing-2xl;
+  font-size: $font-size-lg;
+}
+
+// Component-specific error message variant (large centered alert)
+.errorMessage.alert {
+  text-align: center;
+  padding: $spacing-2xl;
+  font-size: $font-size-lg;
+  border-radius: $radius-md;
+}
+
+.emptyState {
+  border-radius: $radius-md;
+}

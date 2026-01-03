@@ -1,0 +1,41 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.container {
+  @include flex-center;
+  min-height: 100vh;
+  padding: $spacing-md;
+}
+
+.loginCard {
+  border-radius: $radius-lg;
+  padding: $spacing-2xl;
+  background: $dark-platinum;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 10%;
+
+  @include mobile {
+    padding: $spacing-xl;
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $primary-color;
+  margin: 0 0 $spacing-sm 0;
+}
+
+.subtitle {
+  text-align: center;
+  margin: 0 0 $spacing-xl 0;
+  font-size: $font-size-base;
+}
+
+// Component-specific error message variant (centered alert)
+.errorMessage.alert {
+  text-align: center;
+}
+

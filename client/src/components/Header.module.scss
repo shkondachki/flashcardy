@@ -1,0 +1,221 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+
+.pageHeader {
+  margin-bottom: $spacing-xl;
+  gap: $spacing-md;
+  background: $dark-platinum;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  @include mobile {
+    margin-bottom: $spacing-md;
+  }
+
+  &.sticky {
+    box-shadow: 1px 1px 7px 4px #151515;
+
+    .container {
+      padding: $spacing-md $spacing-md;
+    }
+  }
+
+  .container {
+    max-width: $container-lg;
+    margin: 0 auto;
+    width: 100%;
+    padding: $spacing-lg $spacing-md;
+    transition: padding 0.15s ease-in;
+    @include flex-between;
+
+    @include mobile {
+      padding: $spacing-md;
+    }
+  }
+
+  .logoSection {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+
+    h1 {
+      margin: 0;
+      font-size: $font-size-2xl;
+
+      @include mobile {
+        font-size: $font-size-xl;
+      }
+
+      @include desktop {
+        a {
+          text-decoration: none;
+          color: $primary-color;
+          position: relative;
+          top: -3px;
+        }
+      }
+    }
+  }
+}
+
+.menuLink {
+  font-size: $font-size-sm;
+  color: $white;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: $font-weight-medium;
+
+  &:hover {
+    color: $white;
+    text-decoration: underline;
+  }
+}
+
+.headerActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.mobileActions {
+  display: none;
+  align-items: center;
+  gap: $spacing-sm;
+
+  @include mobile {
+    display: flex;
+  }
+}
+
+.mobileStudyButton {
+  font-size: $font-size-sm;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+.hamburgerButton {
+  background: none;
+  border: none;
+  color: $white;
+  cursor: pointer;
+  @include flex-center;
+  border-radius: $radius-sm;
+  transition: background-color $transition-base;
+  width: 28px;
+  height: 40px;
+  margin-left: 10px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.hamburgerIcon {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: block;
+
+  // Top line (::before) - also creates middle line via box-shadow
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: $white;
+    border-radius: 2px;
+    top: 0;
+    left: 0;
+    transition: all $transition-base;
+    transform-origin: center;
+    // Middle line created via box-shadow (positioned 8px down)
+    box-shadow: 0 8px 0 0 $white;
+  }
+
+  // Bottom line (::after)
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: $white;
+    border-radius: 2px;
+    bottom: 0;
+    left: 0;
+    transition: all $transition-base;
+    transform-origin: center;
+  }
+
+  // When hamburger is open, transform to X
+  .hamburgerButton.open & {
+    // Remove box-shadow (middle line) when open
+    &::before {
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      box-shadow: none;
+    }
+
+    // Rotate bottom line to form lower part of X
+    &::after {
+      bottom: 50%;
+      transform: translateY(50%) rotate(-45deg);
+    }
+  }
+}
+
+.mobileMenuOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $transition-base, visibility $transition-base;
+
+  @include mobile {
+    display: block;
+  }
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  max-width: 85vw;
+  height: 100vh;
+  background: $dark-platinum;
+  padding: 6rem $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform $transition-slow;
+  overflow-y: auto;
+
+  .mobileMenuOverlay.open & {
+    transform: translateX(0);
+  }
+}
+
+.mobileMenuItem {
+  width: 100%;
+  justify-content: flex-start;
+  padding: $spacing-md;
+  gap: $spacing-md;
+  text-align: left;
+
+  svg {
+    flex-shrink: 0;
+  }
+}

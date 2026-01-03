@@ -1,0 +1,108 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+// Form input styles
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: $font-size-sm;
+  line-height: 1.4em;
+  background: $platinum;
+  color: $white;
+  border: 1px solid $platinum;
+  border-radius: $radius-md;
+  font-family: $font-family-base;
+  transition: border-color $transition-base, box-shadow $transition-base;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+  }
+
+  &.error {
+    border-color: $danger-color;
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+select {
+  cursor: pointer;
+}
+
+// Form container
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+// Form group (field wrapper)
+.formGroup,
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  label {
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+
+    .required {
+      color: $danger-color;
+    }
+  }
+}
+
+// Form row (two-column layout)
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Form hint text
+.formHint {
+  color: $light-platinum;
+  font-size: $font-size-xs;
+  opacity: 0.5;
+}
+
+// Form actions (button container)
+.formActions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: flex-end;
+  padding-top: $spacing-sm;
+}
+
+// Error message (inline field error style)
+.errorMessage {
+  color: $danger-color;
+  font-size: $font-size-xs;
+
+  // Alert-style variant (full-width error alert)
+  &.alert {
+    background: #f8d7da;
+    color: #721c24;
+    padding: $spacing-md;
+    border-radius: $radius-sm;
+    border: 1px solid #f5c6cb;
+    margin-top: 0;
+    margin-bottom: $spacing-md;
+  }
+}

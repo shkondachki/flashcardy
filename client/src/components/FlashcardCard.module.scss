@@ -1,0 +1,131 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.card {
+  background: $dark-platinum;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+}
+
+.header {
+  @include flex-between;
+  margin-bottom: $spacing-md;
+  gap: $spacing-md;
+}
+
+.badges {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-sm;
+  flex-shrink: 0;
+
+  [class*="lucide-pencil"] {
+    padding: 3px;
+  }
+}
+
+.tech {
+  background: $primary-color;
+  color: $white;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+
+  &.javascript {
+    background: #cbbd2b;
+    color: $black;
+  }
+
+  &.typescript {
+    background: #234170;
+    color: $white;
+  }
+
+  &.react {
+    background: #2f3239;
+    color: #52d7fd;
+  }
+
+  &.node {
+    background: #3c5b31;
+    color: $white;
+  }
+}
+
+.difficulty {
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  text-transform: capitalize;
+
+  &.easy {
+    background: $difficulty-easy-bg;
+    color: $difficulty-easy-text;
+  }
+
+  &.medium {
+    background: $difficulty-medium-bg;
+    color: $difficulty-medium-text;
+  }
+
+  &.hard {
+    background: $difficulty-hard-bg;
+    color: $difficulty-hard-text;
+  }
+}
+
+.content {
+  margin-bottom: $spacing-md;
+}
+
+.question {
+  margin: 0 0 $spacing-md 0;
+}
+
+.answer {
+  animation: fadeIn 0.3s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.studyActions {
+  margin: $spacing-2xl 0 0;
+  @include flex-center;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  padding-top: $spacing-md;
+}
+
+.categoryTag {
+  background: $platinum;
+  color: $light-platinum;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+}
+
+.actionBtn {
+  cursor: pointer;
+  transition: all $transition-base;
+}

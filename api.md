@@ -1,0 +1,252 @@
+# Flashcardy API Documentation
+
+Base URL: `http://localhost:3000`
+
+## Endpoints
+
+### Health Check
+
+#### GET /health
+Check if the server is running.
+
+**Response:**
+```json
+{
+  "status": "ok"
+}
+```
+
+---
+
+### Flashcards
+
+#### GET /flashcards
+Get all flashcards with optional filtering.
+
+**Query Parameters:**
+- `tech` (optional): Filter by technology. Valid values: `JavaScript`, `TypeScript`, `React`, `Node`
+- `category` (optional): Filter by category tag (string)
+- `search` (optional): Search in question and answer text (case-insensitive)
+
+**Example Requests:**
+```
+GET /flashcards
+GET /flashcards?tech=React
+GET /flashcards?category=hooks
+GET /flashcards?search=useState
+GET /flashcards?tech=React&category=hooks&search=useState
+```
+
+**Response:** `200 OK`
+```json
+[
+  {
+    "id": "uuid-here",
+    "question": "What is React?",
+    "answer": "React is a JavaScript library...",
+    "tech": "React",
+    "categories": ["basics", "intro"],
+    "difficulty": "easy",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  }
+]
+```
+
+**Query Logic:**
+- `tech`: Exact enum match
+- `category`: Array contains check (searches within `categories` array)
+- `search`: Case-insensitive text search in both `question` and `answer` fields
+- Multiple filters are combined with AND logic
+
+---
+
+#### GET /flashcards/:id
+Get a single flashcard by ID.
+
+**Path Parameters:**
+- `id`: Flashcard UUID
+
+**Example:**
+```
+GET /flashcards/123e4567-e89b-12d3-a456-426614174000
+```
+
+**Response:** `200 OK`
+```json
+{
+  "id": "uuid-here",
+  "question": "What is React?",
+  "answer": "React is a JavaScript library...",
+  "tech": "React",
+  "categories": ["basics"],
+  "difficulty": "easy",
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z"
+}
+```
+
+**Error Response:** `404 Not Found`
+```json
+{
+  "error": "Flashcard not found"
+}
+```
+
+---
+
+#### POST /flashcards
+Create a new flashcard.
+
+**Request Body:**
+```json
+{
+  "question": "What is React?",
+  "answer": "React is a JavaScript library for building user interfaces.",
+  "tech": "React",
+  "categories": ["basics", "intro"],
+  "difficulty": "easy"
+}
+```
+
+**Required Fields:**
+- `question`: string
+- `answer`: string
+- `tech`: `"JavaScript" | "TypeScript" | "React" | "Node"`
+
+**Optional Fields:**
+- `categories`: string[] (array of category tags)
+- `difficulty`: `"easy" | "medium" | "hard"`
+
+**Example:**
+```bash
+POST /flashcards
+Content-Type: application/json
+
+{
+  "question": "Explain useState hook",
+  "answer": "useState is a React hook...",
+  "tech": "React",
+  "categories": ["hooks", "state"],
+  "difficulty": "medium"
+}
+```
+
+**Response:** `201 Created`
+```json
+{
+  "id": "uuid-here",
+  "question": "Explain useState hook",
+  "answer": "useState is a React hook...",
+  "tech": "React",
+  "categories": ["hooks", "state"],
+  "difficulty": "medium",
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T00:00:00.000Z"
+}
+```
+
+**Error Responses:**
+- `400 Bad Request`: Missing required fields or invalid enum values
+```json
+{
+  "error": "Missing required fields: question, answer, and tech are required"
+}
+```
+
+---
+
+#### PUT /flashcards/:id
+Update an existing flashcard.
+
+**Path Parameters:**
+- `id`: Flashcard UUID
+
+**Request Body:**
+Partial update - only include fields you want to change.
+```json
+{
+  "question": "Updated question",
+  "categories": ["updated", "tags"],
+  "difficulty": "hard"
+}
+```
+
+**Example:**
+```bash
+PUT /flashcards/123e4567-e89b-12d3-a456-426614174000
+Content-Type: application/json
+
+{
+  "difficulty": "hard",
+  "categories": ["advanced", "concepts"]
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "id": "uuid-here",
+  "question": "Updated question",
+  "answer": "Original answer",
+  "tech": "React",
+  "categories": ["updated", "tags"],
+  "difficulty": "hard",
+  "createdAt": "2024-01-01T00:00:00.000Z",
+  "updatedAt": "2024-01-01T01:00:00.000Z"
+}
+```
+
+**Error Responses:**
+- `404 Not Found`: Flashcard doesn't exist
+- `400 Bad Request`: Invalid enum values
+
+---
+
+#### DELETE /flashcards/:id
+Delete a flashcard.
+
+**Path Parameters:**
+- `id`: Flashcard UUID
+
+**Example:**
+```
+DELETE /flashcards/123e4567-e89b-12d3-a456-426614174000
+```
+
+**Response:** `204 No Content` (empty body)
+
+**Error Response:** `404 Not Found`
+```json
+{
+  "error": "Flashcard not found"
+}
+```
+
+---
+
+## Error Handling
+
+All endpoints return JSON error responses with the following structure:
+
+```json
+{
+  "error": "Error message here"
+}
+```
+
+**HTTP Status Codes:**
+- `200 OK`: Success
+- `201 Created`: Resource created
+- `204 No Content`: Success (no response body)
+- `400 Bad Request`: Invalid request data
+- `404 Not Found`: Resource not found
+- `500 Internal Server Error`: Server error
+
+## Notes
+
+- All timestamps are in ISO 8601 format (UTC)
+- IDs are UUIDs generated by Prisma
+- `updatedAt` is automatically updated on PUT requests
+- Search is case-insensitive
+- Category filtering uses array containment (checks if category exists in the array)

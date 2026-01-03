@@ -1,0 +1,62 @@
+@use '../styles/variables' as *;
+
+.errorBoundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: $spacing-xl;
+  background: $off-black;
+}
+
+.errorContent {
+  max-width: 600px;
+  background: $dark-platinum;
+  border-radius: $radius-lg;
+  padding: $spacing-2xl;
+  text-align: center;
+
+  h2 {
+    color: $danger-color;
+    margin-bottom: $spacing-md;
+    font-size: $font-size-2xl;
+  }
+
+  p {
+    color: $light-platinum;
+    margin-bottom: $spacing-xl;
+    line-height: 1.6;
+  }
+}
+
+.errorDetails {
+  text-align: left;
+  margin: $spacing-xl 0;
+  padding: $spacing-md;
+  background: $off-black;
+  border-radius: $radius-md;
+  border: 1px solid $danger-color;
+
+  summary {
+    color: $danger-color;
+    cursor: pointer;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-sm;
+  }
+
+  pre {
+    color: $light-platinum;
+    font-size: $font-size-sm;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+.errorActions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: center;
+  margin-top: $spacing-xl;
+}
+

@@ -1,0 +1,118 @@
+@use '../styles/variables' as *;
+
+.markdown {
+  line-height: 1.8;
+
+  // Headings
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: $spacing-lg;
+    margin-bottom: $spacing-md;
+  }
+
+  h1 { font-size: $font-size-2xl; }
+  h2 { font-size: $font-size-xl; }
+  h3 { font-size: $font-size-lg; }
+  h4, h5, h6 { font-size: $font-size-base; }
+
+  // Paragraphs
+  p {
+    margin: 0 0 $spacing-md 0;
+  }
+
+  // Code blocks
+  pre {
+    border-radius: $radius-sm;
+    margin: $spacing-md 0;
+    overflow-x: auto;
+    font-family: $font-family-mono;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  code {
+    font-family: $font-family-mono;
+    font-size: 0.9375rem;
+    
+    // Inline code
+    &:not(pre code) {
+      background: $platinum;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+      color: $danger-color;
+    }
+  }
+
+  // Lists
+  ul, ol {
+    margin: $spacing-md 0;
+    padding-left: $spacing-xl;
+  }
+
+  li {
+    margin: $spacing-xs 0;
+  }
+
+  // Links
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $primary-hover;
+      text-decoration: underline;
+    }
+  }
+
+  // Blockquotes
+  blockquote {
+    border-left: 4px solid $primary-color;
+    padding-left: $spacing-md;
+    margin: $spacing-md 0;
+    font-style: italic;
+  }
+
+  // Horizontal rule
+  hr {
+    border: none;
+    border-top: 1px solid $platinum;
+    margin: $spacing-lg 0;
+  }
+
+  // Tables
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: $spacing-md 0;
+  }
+
+  th, td {
+    border: 1px solid $platinum;
+    padding: $spacing-sm;
+    text-align: left;
+  }
+
+  th {
+    background: $dark-platinum-100;
+    font-weight: $font-weight-semibold;
+  }
+
+  // Images
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $radius-sm;
+    margin: $spacing-md 0;
+  }
+
+  // Strong and emphasis
+  strong {
+    font-weight: $font-weight-semibold;
+  }
+
+  em {
+    font-style: italic;
+  }
+}
+

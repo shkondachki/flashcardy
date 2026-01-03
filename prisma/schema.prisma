@@ -1,0 +1,47 @@
+// Prisma schema for Flashcard Knowledge App
+// Using PostgreSQL as specified
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Flashcard {
+  id         String      @id @default(uuid())
+  question   String
+  answer     String
+  tech       Tech // Enum: JavaScript | TypeScript | React | Node
+  categories String[] // Array of strings for tags
+  difficulty Difficulty? // Optional enum
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@map("flashcards")
+}
+
+enum Tech {
+  JavaScript
+  TypeScript
+  React
+  Node
+}
+
+enum Difficulty {
+  easy
+  medium
+  hard
+}

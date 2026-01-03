@@ -1,0 +1,110 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+// Button base styles
+@mixin button-base {
+  padding: 12px 20px;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  line-height: 1em;
+  color: $white;
+  border: 2px solid;
+  border-radius: $radius-pill;
+  cursor: pointer;
+  transition: all $transition-base;
+  font-family: $font-family-base;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: $white;
+  }
+}
+
+// Base button class (for utility use)
+.btn {
+  @include button-base;
+}
+
+// Primary
+.btn-primary {
+  @include button-base;
+  background: $primary-color;
+  color: $white;
+  border-color: $primary-color;
+
+  &:hover:not(:disabled) {
+    background: $primary-hover;
+  }
+}
+
+.btn-outline-primary {
+  @include button-base;
+  background: transparent;
+  color: $white;
+  border-color: $primary-color;
+
+  &:hover:not(:disabled) {
+    background: $platinum;
+  }
+}
+
+// Secondary
+.btn-secondary {
+  @include button-base;
+  background: $white;
+  color: $dark-platinum;
+  border-color: $white;
+
+  &:hover:not(:disabled) {
+    color: $dark-platinum;
+    background: $light-platinum;
+  }
+}
+
+.btn-outline-secondary {
+  @include button-base;
+  background: transparent;
+  color: $white;
+  border-color: $platinum;
+
+  &:hover:not(:disabled) {
+    background: $platinum;
+  }
+}
+
+
+// Button sizes
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: $font-size-sm;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: $font-size-lg;
+}
+
+// Icon buttons
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+// Full width button
+.btn-full {
+  width: 100%;
+}
+
+// Squircle
+.btn-squircle {
+  border-radius: $radius-md;
+}
+

@@ -1,0 +1,33 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.container {
+  max-width: $container-md;
+  margin: 0 auto;
+  padding: $spacing-md $spacing-md;
+}
+
+.loading {
+  text-align: center;
+  padding: $spacing-2xl;
+  font-size: $font-size-lg;
+}
+
+
+.emptyState {
+  text-align: center;
+  padding: $spacing-2xl;
+  font-size: $font-size-lg;
+  background: $dark-platinum;
+  border-radius: $radius-md;
+}
+
+.flashcardsCount {
+  margin-bottom: $spacing-md;
+  font-size: $font-size-base;
+}
+
+.flashcardsGrid {
+  display: grid;
+  gap: 20px;
+}
