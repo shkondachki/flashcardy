@@ -2,7 +2,8 @@
 
 import type { Flashcard, FlashcardFilters } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+// In production (single service), use relative URLs. In development, use VITE_API_URL or localhost fallback
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '' : 'http://localhost:3000');
 
 // Response type for paginated flashcards
 interface PaginatedFlashcardsResponse {

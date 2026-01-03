@@ -1,6 +1,7 @@
 // API client for authentication - using native fetch
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+// In production (single service), use relative URLs. In development, use VITE_API_URL or localhost fallback
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '' : 'http://localhost:3000');
 
 export interface LoginCredentials {
   email: string;
