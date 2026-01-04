@@ -5,6 +5,7 @@
   background: $dark-platinum;
   border-radius: $radius-lg;
   padding: $spacing-lg;
+  overflow: hidden;
 }
 
 .header {
@@ -88,6 +89,10 @@
 
 .question {
   margin: 0 0 $spacing-md 0;
+
+  p {
+    line-height: 1.5em;
+  }
 }
 
 .answer {

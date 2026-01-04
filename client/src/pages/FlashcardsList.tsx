@@ -1,5 +1,5 @@
-import {useState, useEffect, useRef, useMemo} from 'react';
-import {getFlashcards, createFlashcard, updateFlashcard, deleteFlashcard} from '../api/flashcards';
+import {useState, useEffect, useRef} from 'react';
+import {getFlashcards, createFlashcard, updateFlashcard, deleteFlashcard, getAllCategories} from '../api/flashcards';
 import {Flashcard, FlashcardFilters} from '../types';
 import {FlashcardCard} from '../components/FlashcardCard';
 import {SearchAndFilters} from '../components/SearchAndFilters';
@@ -33,13 +33,18 @@ export function FlashcardsList({
     const [hasMore, setHasMore] = useState(true);
 
     const observerTarget = useRef<HTMLDivElement>(null);
+    const [allCategories, setAllCategories] = useState<string[]>([]);
 
-    // Use useMemo to calculate available categories safely
-    const availableCategories = useMemo(() => {
-        return Array.from(
-            new Set(flashcards.flatMap((card) => card.categories))
-        ).sort();
-    }, [flashcards]);
+    // Fetch all categories on component mount
+    useEffect(() => {
+        getAllCategories()
+            .then(setAllCategories)
+            .catch((err) => {
+                console.error('Error fetching categories:', err);
+                // Fallback to empty array on error
+                setAllCategories([]);
+            });
+    }, []);
 
     // Reset when filters change
     useEffect(() => {
@@ -120,6 +125,10 @@ export function FlashcardsList({
             setPage(1);
             setFlashcards([]);
             setHasMore(true);
+            // Refresh categories after creating a flashcard
+            getAllCategories()
+                .then(setAllCategories)
+                .catch((err) => console.error('Error refreshing categories:', err));
             await loadFlashcards(1, true);
         } catch (err) {
             throw err;
@@ -141,6 +150,10 @@ export function FlashcardsList({
             setPage(1);
             setFlashcards([]);
             setHasMore(true);
+            // Refresh categories after updating a flashcard
+            getAllCategories()
+                .then(setAllCategories)
+                .catch((err) => console.error('Error refreshing categories:', err));
             await loadFlashcards(1, true);
         } catch (err) {
             throw err;
@@ -153,6 +166,10 @@ export function FlashcardsList({
             setPage(1);
             setFlashcards([]);
             setHasMore(true);
+            // Refresh categories after deleting a flashcard
+            getAllCategories()
+                .then(setAllCategories)
+                .catch((err) => console.error('Error refreshing categories:', err));
             await loadFlashcards(1, true);
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to delete flashcard');
@@ -176,7 +193,7 @@ export function FlashcardsList({
                 <SearchAndFilters
                     filters={filters}
                     onFiltersChange={setFilters}
-                    availableCategories={availableCategories}
+                    availableCategories={allCategories}
                 />
 
                 <Preloader />
@@ -189,7 +206,7 @@ export function FlashcardsList({
             <SearchAndFilters
                 filters={filters}
                 onFiltersChange={setFilters}
-                availableCategories={availableCategories}
+                availableCategories={allCategories}
             />
 
             {error && <div className="errorMessage alert">Error: {error}</div>}

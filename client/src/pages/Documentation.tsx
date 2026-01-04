@@ -418,11 +418,21 @@ App (AppProvider Context)
             <li><strong>Header</strong> - Globally accessible, manages flashcards count for Study Mode button</li>
           </ul>
 
+          <h3>Reusable Components</h3>
+          <p>
+            The application includes several reusable components used throughout:
+          </p>
+          <ul>
+            <li><strong>Preloader</strong> - Reusable loading spinner component with variants (fullscreen, inline, spinnerOnly) and size options (small, medium, large). Used throughout the app for loading states in FlashcardsList, StudyMode, and other components.</li>
+            <li><strong>ErrorBoundary</strong> - React error boundary component that catches JavaScript errors anywhere in the component tree and displays a fallback UI, preventing the entire application from crashing. Wraps the main App component.</li>
+            <li><strong>MarkdownRenderer</strong> - Component for rendering markdown content in flashcards, supports code blocks (with syntax highlighting), tables, lists, links, and other markdown features.</li>
+          </ul>
+
           <h3>Error Handling</h3>
           <p>
             The frontend uses React Error Boundaries to catch and handle component errors gracefully,
             preventing the entire application from crashing. Error boundaries display a fallback UI
-            when errors occur.
+            when errors occur. The app is wrapped with an ErrorBoundary component at the root level.
           </p>
 
           <h3>Configuration & Constants</h3>
@@ -501,6 +511,13 @@ App (AppProvider Context)
             <li>Returns paginated JSON response</li>
             <li>Frontend updates state and renders cards</li>
           </ol>
+
+          <p className={styles.note}>
+            <strong>Note:</strong> Categories/tags are fetched separately on component mount via 
+            <code>GET /flashcards/categories</code> to show all available tags in the filter dropdown, 
+            not just from currently loaded flashcards. This ensures users can filter by any category 
+            that exists in the database, regardless of pagination.
+          </p>
         </section>
 
         <section id="database" className={styles.section}>
@@ -605,6 +622,12 @@ enum Difficulty {
                   <td><code>/flashcards/:id</code></td>
                   <td>❌</td>
                   <td>Get single flashcard</td>
+                </tr>
+                <tr>
+                  <td><code>GET</code></td>
+                  <td><code>/flashcards/categories</code></td>
+                  <td>❌</td>
+                  <td>Get all unique categories across all flashcards (sorted alphabetically)</td>
                 </tr>
                 <tr>
                   <td><code>POST</code></td>

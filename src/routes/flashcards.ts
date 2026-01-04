@@ -70,6 +70,26 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
+// GET /flashcards/categories - Get all unique categories across all flashcards
+router.get('/categories', async (req: Request, res: Response) => {
+  try {
+    // Get all flashcards (only categories field for performance)
+    const flashcards = await prisma.flashcard.findMany({
+      select: { categories: true }
+    });
+    
+    // Extract and deduplicate categories
+    const allCategories = Array.from(
+      new Set(flashcards.flatMap(card => card.categories))
+    ).sort();
+    
+    res.json({ categories: allCategories });
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json(createErrorResponse('Failed to fetch categories', 'FETCH_ERROR'));
+  }
+});
+
 // GET /flashcards/:id - Get single flashcard
 router.get('/:id', async (req: Request, res: Response) => {
   try {

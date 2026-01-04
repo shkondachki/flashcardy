@@ -48,6 +48,20 @@ export async function getFlashcards(
   return response.json();
 }
 
+// Get all unique categories across all flashcards
+export async function getAllCategories(): Promise<string[]> {
+  const response = await fetch(`${API_BASE_URL}/flashcards/categories`, {
+    credentials: 'include',
+  });
+  
+  if (!response.ok) {
+    throw new Error(`Failed to fetch categories: ${response.statusText}`);
+  }
+  
+  const data = await response.json();
+  return data.categories;
+}
+
 // Get single flashcard by ID
 export async function getFlashcard(id: string): Promise<Flashcard> {
   const response = await fetch(`${API_BASE_URL}/flashcards/${id}`, {
