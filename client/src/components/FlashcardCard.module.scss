@@ -93,6 +93,12 @@
   p {
     line-height: 1.5em;
   }
+
+  code:not(pre code) {
+    font-size: $font-size-base;
+    position: relative;
+    top: -4px;
+  }
 }
 
 .answer {
