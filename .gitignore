@@ -9,10 +9,17 @@ build
 .env
 .env.local
 .env.*.local
+.env.example.local
 
 # Database
 *.db
 *.sqlite
+*.sql
+!prisma/migrations/**/*.sql
+
+# Docker (sensitive files)
+docker-compose.override.yml
+docker-compose.local.yml
 
 # Logs
 *.log
@@ -31,7 +38,10 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-
-RAILWAY_DEPLOYMENT.md
+# Backup files
 local_data.sql
 local_backup.sql
+
+# Documentation (optional - uncomment if you don't want to commit)
+RAILWAY_DEPLOYMENT.md
+SECURITY_AUDIT.md

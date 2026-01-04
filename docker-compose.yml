@@ -6,7 +6,7 @@ services:
     container_name: postgres_dev
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: N6$KmQXYjKJKGobz
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: flashcardy
     ports:
       - "5432:5432"

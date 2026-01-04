@@ -68,6 +68,7 @@ export function FlashcardCard({
                         </span>
                     )}
                 </div>
+
                 {!studyMode && isAuthenticated && <div className={styles.actions}>
                     <div
                         onClick={() => onEdit ? onEdit(flashcard) : ""}
@@ -94,16 +95,6 @@ export function FlashcardCard({
                 </div>}
             </div>
 
-            {/* Show only if in Study Mode */}
-            {studyMode && <div className={styles.studyActions}>
-                <button
-                    onClick={handleToggleAnswer}
-                    className="btn-outline-primary"
-                >
-                    {showAnswer ? 'Hide Answer' : 'Show Answer'}
-                </button>
-            </div>}
-
             {flashcard.categories.length > 0 && (
                 <div className={styles.categories}>
                     {flashcard.categories.map((category, index) => (
@@ -113,6 +104,16 @@ export function FlashcardCard({
                     ))}
                 </div>
             )}
+
+            {/* Show only if in Study Mode */}
+            {studyMode && <div className={styles.studyActions}>
+                <button
+                    onClick={handleToggleAnswer}
+                    className="btn-outline-primary"
+                >
+                    {showAnswer ? 'Hide Answer' : 'Show Answer'}
+                </button>
+            </div>}
         </div>
     );
 }
