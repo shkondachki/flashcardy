@@ -89,7 +89,9 @@ export function FlashcardCard({
             </div>
 
             <div className={styles.content}>
-                <h3 className={styles.question}>{flashcard.question}</h3>
+                <h3 className={styles.question}>
+                    <MarkdownRenderer content={flashcard.question}/>
+                </h3>
                 {showAnswer && <div className={styles.answer}>
                     <MarkdownRenderer content={flashcard.answer}/>
                 </div>}
