@@ -801,9 +801,9 @@ enum Difficulty {
         <section className={styles.section}>
           <h2>Additional Resources</h2>
           <ul>
-            <li><a href="/api.md" target="_blank">API Documentation</a> - Detailed endpoint docs</li>
-            <li><a href="/AUTH_SETUP.md" target="_blank">Authentication Setup Guide</a> - Auth configuration</li>
-            <li><a href="/DATABASE_SETUP.md" target="_blank">Database Setup Guide</a> - PostgreSQL setup</li>
+            {/*<li><a href="/api.md" target="_blank">API Documentation</a> - Detailed endpoint docs</li>*/}
+            {/*<li><a href="/AUTH_SETUP.md" target="_blank">Authentication Setup Guide</a> - Auth configuration</li>*/}
+            {/*<li><a href="/DATABASE_SETUP.md" target="_blank">Database Setup Guide</a> - PostgreSQL setup</li>*/}
             <li><a href="https://www.prisma.io/docs" target="_blank" rel="noopener noreferrer">Prisma Documentation</a></li>
             <li><a href="https://react.dev" target="_blank" rel="noopener noreferrer">React Documentation</a></li>
           </ul>
