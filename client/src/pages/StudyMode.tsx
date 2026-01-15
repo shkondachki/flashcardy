@@ -51,6 +51,7 @@ export function StudyMode({onBack}: StudyModeProps) {
         setFilters({
             tech: tech || undefined
         });
+        setCurrentIndex(0);
     };
 
     const handleRandom = useCallback(() => {
