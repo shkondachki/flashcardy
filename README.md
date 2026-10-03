@@ -100,7 +100,7 @@ The app will be available at `http://localhost:5173` (frontend) and `http://loca
 - [API Documentation](./api.md) - Detailed API endpoint reference
 - [Authentication Setup](./AUTH_SETUP.md) - Authentication configuration guide
 - [Database Setup](./DATABASE_SETUP.md) - PostgreSQL setup instructions
-- [Deployment Guide](./RAILWAY_DEPLOYMENT.md) - Railway deployment instructions
+- Deployment: Vercel (frontend + Express API as a serverless function via `api/index.ts` and `vercel.json`) with a Neon Postgres database
 
 ## 🏗️ Project Structure
 
@@ -123,7 +123,8 @@ flashcardy/
 
 See `.env.example` for required environment variables. Key variables:
 
-- `DATABASE_URL` - PostgreSQL connection string
+- `DATABASE_URL` - PostgreSQL connection string (pooled in production)
+- `DATABASE_URL_UNPOOLED` - Direct PostgreSQL connection string (for migrations)
 - `JWT_SECRET` - Secret key for JWT tokens
 - `ADMIN_EMAIL` - Admin user email
 - `ADMIN_PASSWORD` - Admin user password
