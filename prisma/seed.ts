@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { BCRYPT_ROUNDS } from '../src/lib/constants';
 
 // For seed script, we can create a new instance since it's a standalone script

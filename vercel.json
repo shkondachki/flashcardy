@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --include=dev",
+  "buildCommand": "npm run build:frontend",
+  "outputDirectory": "client/dist",
+  "rewrites": [
+    { "source": "/auth/:path*", "destination": "/api" },
+    { "source": "/flashcards", "destination": "/api" },
+    { "source": "/flashcards/:path*", "destination": "/api" },
+    { "source": "/health", "destination": "/api" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

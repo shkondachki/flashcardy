@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { prisma } from '../lib/prisma';
 import { JWT_EXPIRES_IN, JWT_COOKIE_MAX_AGE_MS } from '../lib/constants';
